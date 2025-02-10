@@ -27,6 +27,9 @@
 # Maintainer: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 # Contributor: Michael Pusterhofer <pusterhofer(at)student(dot)tugraz(dot)at>
 
+_os="$( \
+  uname \
+    -o)"
 _py="python"
 _pkg=itstool
 pkgname="${_pkg}"
@@ -42,9 +45,14 @@ license=(
 )
 depends=(
   'docbook-xml'
-  'libxml2'
+  "libxml2"
   "${_py}"
 )
+if [[ "${_os}" == "Android" ]]; then
+  depends+=(
+    "libxml2-${_py}"
+  )
+fi
 makedepends=(
   "git"
 )
